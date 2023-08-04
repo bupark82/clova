@@ -9,6 +9,9 @@ import base64
 import json
 import http.client
 
+st.write("""
+         # My first app 
+         """)
 
 class CompletionExecutor:
     def __init__(self, host, api_key, api_key_primary_val, request_id):
@@ -48,28 +51,37 @@ if __name__ == '__main__':
         request_id = os.environ["REQUEST_ID"]
     )
 
+    col1, col2 = st.columns(2)
+    with col1: 
     # preset_text = 'input text'
-    preset_text = '5억원 무이자 융자는 되고 7천만원 이사비는 안된다'
+        preset_text = '5억원 무이자 융자는 되고 7천만원 이사비는 안된다'
+        title = st.text_area('Input Text:', preset_text)
 
-    request_data = {
-        'text': preset_text,
-        'includeAiFilters': True
-    }
+        request_data = {
+            # 'text': preset_text,
+            'text': title,
+            'includeAiFilters': True
+        }
 
-    response_text = completion_executor.execute(request_data)
-    # print(preset_text)
-    # print(response_text)
+        response_text = completion_executor.execute(request_data)
+        # print(preset_text)
+        # print(response_text)
 
 
-st.write("""
-         # My first app
-         Hello *world!* \n
-         """)
 
-st.write( 
-    preset_text
-    )
 
-st.write(
-    response_text
-)
+# st.write( 
+#     preset_text
+#     )
+
+# st.write(
+#     response_text
+# )
+
+# title = st.text_input('Input Text:', preset_text)
+# st.write(title)
+
+# response = completion_executor.execute(request)
+with col2:
+    st.write('Response')
+    st.write(response_text)
